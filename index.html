@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CareSync HMS - Hospital Management System</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Sidebar Navigation -->
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <h2>CareSync HMS</h2>
+        </div>
+        <ul class="nav-menu">
+          <li class="nav-item active" data-page="dashboard">
+            <a href="#" class="nav-link">
+              <i class="fas fa-tachometer-alt"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="login">
+            <a href="#" class="nav-link">
+              <i class="fas fa-sign-in-alt"></i>
+              <span>Login</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="user-management">
+            <a href="#" class="nav-link">
+              <i class="fas fa-users-cog"></i>
+              <span>User Management</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="patient-registration">
+            <a href="#" class="nav-link">
+              <i class="fas fa-user-injured"></i>
+              <span>Patient Registration</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="patient-timeline">
+            <a href="#" class="nav-link">
+              <i class="fas fa-history"></i>
+              <span>Patient Timeline</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="opd-queue">
+            <a href="#" class="nav-link">
+              <i class="fas fa-calendar-check"></i>
+              <span>OPD Queue</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="opd-consultation">
+            <a href="#" class="nav-link">
+              <i class="fas fa-stethoscope"></i>
+              <span>OPD Consultation</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="ipd-admission">
+            <a href="#" class="nav-link">
+              <i class="fas fa-procedures"></i>
+              <span>IPD Admission</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="ipd-notes">
+            <a href="#" class="nav-link">
+              <i class="fas fa-clipboard"></i>
+              <span>IPD Notes</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="emergency">
+            <a href="#" class="nav-link">
+              <i class="fas fa-ambulance"></i>
+              <span>Emergency</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="lab-orders">
+            <a href="#" class="nav-link">
+              <i class="fas fa-flask"></i>
+              <span>Lab Orders</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="lab-reports">
+            <a href="#" class="nav-link">
+              <i class="fas fa-file-medical"></i>
+              <span>Lab Reports</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="pharmacy">
+            <a href="#" class="nav-link">
+              <i class="fas fa-pills"></i>
+              <span>Pharmacy</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="billing">
+            <a href="#" class="nav-link">
+              <i class="fas fa-receipt"></i>
+              <span>Billing</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="insurance">
+            <a href="#" class="nav-link">
+              <i class="fas fa-credit-card"></i>
+              <span>Insurance</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="inventory">
+            <a href="#" class="nav-link">
+              <i class="fas fa-boxes"></i>
+              <span>Inventory</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="staff-directory">
+            <a href="#" class="nav-link">
+              <i class="fas fa-user-md"></i>
+              <span>Staff Directory</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="admin-dashboard">
+            <a href="#" class="nav-link">
+              <i class="fas fa-chart-bar"></i>
+              <span>Admin Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="department-analytics">
+            <a href="#" class="nav-link">
+              <i class="fas fa-chart-pie"></i>
+              <span>Department Analytics</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="ai-alerts">
+            <a href="#" class="nav-link">
+              <i class="fas fa-brain"></i>
+              <span>AI Alerts</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="fraud-detection">
+            <a href="#" class="nav-link">
+              <i class="fas fa-shield-alt"></i>
+              <span>Fraud Detection</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="bed-optimization">
+            <a href="#" class="nav-link">
+              <i class="fas fa-bed"></i>
+              <span>Bed Optimization</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Header -->
+        <header class="header">
+          <div class="header-left">
+            <button class="menu-toggle" id="menu-toggle">
+              <i class="fas fa-bars"></i>
+            </button>
+            <div class="breadcrumb">
+              <span id="current-page">Dashboard</span>
+            </div>
+          </div>
+          <div class="header-right">
+            <div class="role-selector">
+              <select id="role-select">
+                <option value="admin">Admin</option>
+                <option value="doctor">Doctor</option>
+                <option value="nurse">Nurse</option>
+                <option value="lab">Lab Staff</option>
+                <option value="pharmacy">Pharmacy Staff</option>
+              </select>
+            </div>
+            <div class="user-menu">
+              <i class="fas fa-user-circle"></i>
+              <span>Admin User</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="page-content">
+          <!-- Dashboard Page -->
+          <div id="dashboard" class="page active">
+            <div class="page-header">
+              <h1>Dashboard</h1>
+              <p>Overview of hospital operations</p>
+            </div>
+
+            <div class="dashboard-kpis">
+              <div class="kpi-card">
+                <div class="kpi-icon">
+                  <i class="fas fa-user-injured"></i>
+                </div>
+                <div class="kpi-info">
+                  <h3 id="total-patients">0</h3>
+                  <p>Total Patients</p>
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-icon">
+                  <i class="fas fa-procedures"></i>
+                </div>
+                <div class="kpi-info">
+                  <h3 id="bed-occupancy">0%</h3>
+                  <p>Bed Occupancy</p>
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-icon">
+                  <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="kpi-info">
+                  <h3 id="revenue">₹0</h3>
+                  <p>Today's Revenue</p>
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-icon">
+                  <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="kpi-info">
+                  <h3 id="appointments">0</h3>
+                  <p>Today's Appointments</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="dashboard-charts">
+              <div class="chart-container">
+                <h3>Patient Distribution by Department</h3>
+                <canvas id="department-chart"></canvas>
+              </div>
+              <div class="chart-container">
+                <h3>Monthly Revenue</h3>
+                <canvas id="revenue-chart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Login Page -->
+          <div id="login" class="page">
+            <div class="auth-container">
+              <div class="auth-form" id="login-form-container">
+                <h2>Hospital Login</h2>
+                <form id="login-form">
+                  <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required />
+                  </div>
+                  <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <p class="auth-switch">Don't have an account? <a href="#" id="show-signup-link">Sign Up</a></p>
+              </div>
+              
+              <div class="auth-form" id="signup-form-container" style="display: none;">
+                <h2>Sign Up</h2>
+                <form id="signup-form">
+                  <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="signup-role">Role</label>
+                    <select id="signup-role" required>
+                      <option value="">Select Role</option>
+                      <option value="doctor">Doctor</option>
+                      <option value="nurse">Nurse</option>
+                      <option value="admin">Admin</option>
+                      <option value="lab">Lab Staff</option>
+                      <option value="pharmacy">Pharmacy Staff</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="signup-confirm-password">Confirm Password</label>
+                    <input type="password" id="signup-confirm-password" required />
+                  </div>
+                  <button type="submit" class="btn btn-primary">Sign Up</button>
+                </form>
+                <p class="auth-switch">Already have an account? <a href="#" id="show-login-link">Login</a></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- User Management Page -->
+          <div id="user-management" class="page">
+            <div class="page-header">
+              <h1>User & Role Management</h1>
+              <p>Manage hospital staff and their roles</p>
+            </div>
+
+            <div class="content-section">
+              <div class="form-section">
+                <h3>Create New User</h3>
+                <form id="user-form">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="user-name">Full Name</label>
+                      <input type="text" id="user-name" required />
+                    </div>
+                    <div class="form-group">
+                      <label for="user-email">Email</label>
+                      <input type="email" id="user-email" required />
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="user-role">Role</label>
+                      <select id="user-role" required>
+                        <option value="">Select Role</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="nurse">Nurse</option>
+                        <option value="admin">Admin</option>
+                        <option value="lab">Lab Staff</option>
+                        <option value="pharmacy">Pharmacy Staff</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="user-department">Department</label>
+                      <select id="user-department" required>
+                        <option value="">Select Department</option>
+                        <option value="general">General Medicine</option>
+                        <option value="cardiology">Cardiology</option>
+                        <option value="neurology">Neurology</option>
+                        <option value="orthopedics">Orthopedics</option>
+                        <option value="pediatrics">Pediatrics</option>
+                        <option value="emergency">Emergency</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">
+                    Create User
+                  </button>
+                </form>
+              </div>
+
+              <div class="table-section">
+                <h3>Users List</h3>
+                <div class="table-controls">
+                  <input
+                    type="text"
+                    id="user-search"
+                    placeholder="Search users..."
+                  />
+                  <button class="btn btn-secondary" id="refresh-users">
+                    <i class="fas fa-sync"></i> Refresh
+                  </button>
+                </div>
+                <div class="table-container">
+                  <table id="users-table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Department</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="users-table-body"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Patient Registration Page -->
+          <div id="patient-registration" class="page">
+            <div class="page-header">
+              <h1>Patient Registration</h1>
+              <p>Register new patients and manage their profiles</p>
+            </div>
+
+            <div class="content-section">
+              <div class="form-section">
+                <h3>Register New Patient</h3>
+                <form id="patient-form">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="patient-id">Patient ID</label>
+                      <input type="text" id="patient-id" readonly />
+                    </div>
+                    <div class="form-group">
+                      <label for="patient-name">Full Name</label>
+                      <input type="text" id="patient-name" required />
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="patient-age">Age</label>
+                      <input type="number" id="patient-age" required />
+                    </div>
+                    <div class="form-group">
+                      <label for="patient-gender">Gender</label>
+                      <select id="patient-gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="patient-phone">Phone</label>
+                      <input type="tel" id="patient-phone" required />
+                    </div>
+                    <div class="form-group">
+                      <label for="patient-email">Email</label>
+                      <input type="email" id="patient-email" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="patient-address">Address</label>
+                    <textarea id="patient-address" rows="3"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">
+                    Register Patient
+                  </button>
+                </form>
+              </div>
+
+              <div class="table-section">
+                <h3>Patients List</h3>
+                <div class="table-controls">
+                  <input
+                    type="text"
+                    id="patient-search"
+                    placeholder="Search patients..."
+                  />
+                  <select id="patient-filter">
+                    <option value="">All Patients</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                  <button class="btn btn-secondary" id="refresh-patients">
+                    <i class="fas fa-sync"></i> Refresh
+                  </button>
+                </div>
+                <div class="table-container">
+                  <table id="patients-table">
+                    <thead>
+                      <tr>
+                        <th>Patient ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Phone</th>
+                        <th>Registered</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="patients-table-body"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Patient Timeline Page -->
+          <div id="patient-timeline" class="page">
+            <div class="page-header">
+              <h1>Patient Timeline</h1>
+              <p>Complete patient history and EMR view</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="timeline-filters">
+                <h3>Select Patient</h3>
+                <select id="patient-select">
+                  <option value="">Select Patient</option>
+                </select>
+              </div>
+              
+              <div class="timeline-section">
+                <h3>Patient Timeline</h3>
+                <div class="timeline-tabs">
+                  <button class="tab-btn active" data-tab="opd">OPD Visits</button>
+                  <button class="tab-btn" data-tab="ipd">IPD Stays</button>
+                  <button class="tab-btn" data-tab="lab">Lab Reports</button>
+                  <button class="tab-btn" data-tab="prescriptions">Prescriptions</button>
+                  <button class="tab-btn" data-tab="bills">Bills</button>
+                </div>
+                
+                <div class="timeline-content">
+                  <div class="timeline-item">
+                    <div class="timeline-date">2024-01-20</div>
+                    <div class="timeline-details">
+                      <h4>OPD Consultation</h4>
+                      <p>Dr. John Smith - Cardiology</p>
+                      <p>Symptoms: Chest pain, shortness of breath</p>
+                      <p>Diagnosis: Hypertension</p>
+                    </div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-date">2024-01-15</div>
+                    <div class="timeline-details">
+                      <h4>Lab Report</h4>
+                      <p>Blood Test - Cholesterol: 240 mg/dL</p>
+                      <p>Glucose: 140 mg/dL</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- OPD Queue Page -->
+          <div id="opd-queue" class="page">
+            <div class="page-header">
+              <h1>OPD Queue & Appointments</h1>
+              <p>Manage doctor schedules and patient queues</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="queue-controls">
+                <h3>Today's Queue</h3>
+                <select id="doctor-filter">
+                  <option value="">All Doctors</option>
+                  <option value="dr-smith">Dr. John Smith</option>
+                  <option value="dr-johnson">Dr. Sarah Johnson</option>
+                </select>
+              </div>
+              
+              <div class="queue-list">
+                <div class="queue-item waiting">
+                  <div class="queue-number">#A001</div>
+                  <div class="patient-info">
+                    <div class="patient-name">Rajesh Kumar</div>
+                    <div class="patient-id">PAT001</div>
+                  </div>
+                  <div class="queue-status">
+                    <span class="status-badge status-pending">Waiting</span>
+                  </div>
+                  <div class="queue-actions">
+                    <button class="btn btn-success">Call</button>
+                    <button class="btn btn-warning">Reschedule</button>
+                  </div>
+                </div>
+                <div class="queue-item in-consultation">
+                  <div class="queue-number">#A002</div>
+                  <div class="patient-info">
+                    <div class="patient-name">Priya Sharma</div>
+                    <div class="patient-id">PAT002</div>
+                  </div>
+                  <div class="queue-status">
+                    <span class="status-badge status-active">In Consultation</span>
+                  </div>
+                  <div class="queue-actions">
+                    <button class="btn btn-secondary">View</button>
+                  </div>
+                </div>
+                <div class="queue-item completed">
+                  <div class="queue-number">#A003</div>
+                  <div class="patient-info">
+                    <div class="patient-name">Amit Patel</div>
+                    <div class="patient-id">PAT003</div>
+                  </div>
+                  <div class="queue-status">
+                    <span class="status-badge status-inactive">Completed</span>
+                  </div>
+                  <div class="queue-actions">
+                    <button class="btn btn-secondary">View Report</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- OPD Consultation Page -->
+          <div id="opd-consultation" class="page">
+            <div class="page-header">
+              <h1>OPD Consultation</h1>
+              <p>Consultation form and patient evaluation</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="consultation-form">
+                <h3>Consultation Details</h3>
+                <form id="consultation-form">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="consultation-patient">Patient</label>
+                      <select id="consultation-patient" required>
+                        <option value="">Select Patient</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="consultation-doctor">Doctor</label>
+                      <select id="consultation-doctor" required>
+                        <option value="">Select Doctor</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="symptoms">Symptoms</label>
+                    <textarea id="symptoms" rows="4" placeholder="Describe patient symptoms..."></textarea>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="diagnosis">Diagnosis</label>
+                    <textarea id="diagnosis" rows="4" placeholder="Enter diagnosis..."></textarea>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="prescribed-tests">Prescribed Tests</label>
+                    <input type="text" id="prescribed-tests" placeholder="e.g., Blood Test, X-Ray, MRI">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="medicines">Medicines</label>
+                    <textarea id="medicines" rows="3" placeholder="List prescribed medicines..."></textarea>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="followup-date">Follow-up Date</label>
+                    <input type="date" id="followup-date">
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary">Save Consultation</button>
+                </form>
+              </div>
+              
+              <div class="consultation-history">
+                <h3>Recent Consultations</h3>
+                <div class="consultation-list">
+                  <div class="consultation-item">
+                    <div class="consultation-date">2024-01-20</div>
+                    <div class="consultation-details">
+                      <p><strong>Dr. John Smith</strong></p>
+                      <p>Hypertension</p>
+                      <p>Prescribed: Amlodipine 5mg</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- IPD Admission Page -->
+          <div id="ipd-admission" class="page">
+            <div class="page-header">
+              <h1>IPD Admission & Bed Assignment</h1>
+              <p>Admit patients and manage bed assignments</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="admission-form">
+                <h3>New Admission</h3>
+                <form id="admission-form">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="admission-patient">Patient</label>
+                      <select id="admission-patient" required>
+                        <option value="">Select Patient</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="admission-doctor">Admitting Doctor</label>
+                      <select id="admission-doctor" required>
+                        <option value="">Select Doctor</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="admission-reason">Reason for Admission</label>
+                    <textarea id="admission-reason" rows="3" placeholder="Reason for admission..."></textarea>
+                  </div>
+                  
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="ward-type">Ward Type</label>
+                      <select id="ward-type" required>
+                        <option value="">Select Ward</option>
+                        <option value="general">General Ward</option>
+                        <option value="semi-private">Semi-Private</option>
+                        <option value="private">Private</option>
+                        <option value="icu">ICU</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="bed-number">Bed Number</label>
+                      <select id="bed-number" required>
+                        <option value="">Select Bed</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary">Admit Patient</button>
+                </form>
+              </div>
+              
+              <div class="bed-availability">
+                <h3>Bed Availability</h3>
+                <div class="ward-status">
+                  <div class="ward-info">
+                    <h4>General Ward</h4>
+                    <p>Available: 12/15 beds</p>
+                  </div>
+                  <div class="bed-grid">
+                    <div class="bed-unit available">G001</div>
+                    <div class="bed-unit occupied">G002</div>
+                    <div class="bed-unit available">G003</div>
+                    <div class="bed-unit occupied">G004</div>
+                    <div class="bed-unit available">G005</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- IPD Daily Notes Page -->
+          <div id="ipd-notes" class="page">
+            <div class="page-header">
+              <h1>IPD Daily Notes & Discharge Summary</h1>
+              <p>Track patient progress and prepare discharge summaries</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="notes-form">
+                <h3>Daily Notes</h3>
+                <form id="daily-notes-form">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="notes-patient">Patient</label>
+                      <select id="notes-patient" required>
+                        <option value="">Select Patient</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="notes-date">Date</label>
+                      <input type="date" id="notes-date" required>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="vital-signs">Vital Signs</label>
+                    <textarea id="vital-signs" rows="3" placeholder="BP, Temperature, Pulse, etc."></textarea>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="progress-notes">Progress Notes</label>
+                    <textarea id="progress-notes" rows="4" placeholder="Patient's condition and progress..."></textarea>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="services-used">Services Used</label>
+                    <input type="text" id="services-used" placeholder="e.g., Physiotherapy, Lab tests">
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary">Save Notes</button>
+                </form>
+              </div>
+              
+              <div class="discharge-summary">
+                <h3>Discharge Summary</h3>
+                <div class="summary-preview">
+                  <h4>Patient Discharge Summary</h4>
+                  <p><strong>Patient:</strong> Rajesh Kumar (PAT001)</p>
+                  <p><strong>Admission Date:</strong> 2024-01-15</p>
+                  <p><strong>Discharge Date:</strong> 2024-01-22</p>
+                  <p><strong>Diagnosis:</strong> Pneumonia</p>
+                  <p><strong>Condition at Discharge:</strong> Stable</p>
+                  <p><strong>Medications:</strong> Amoxicillin 500mg, Paracetamol 650mg</p>
+                  <p><strong>Follow-up:</strong> After 1 week</p>
+                </div>
+                <button class="btn btn-secondary">Generate Summary</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Emergency Page -->
+          <div id="emergency" class="page">
+            <div class="page-header">
+              <h1>Emergency Intake & Triage</h1>
+              <p>Quick patient registration and severity assessment</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="emergency-form">
+                <h3>Emergency Registration</h3>
+                <form id="emergency-form">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="emergency-name">Patient Name</label>
+                      <input type="text" id="emergency-name" placeholder="Enter name or 'Unknown'" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="emergency-age">Age</label>
+                      <input type="number" id="emergency-age" placeholder="Enter age">
+                    </div>
+                  </div>
+                  
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="emergency-gender">Gender</label>
+                      <select id="emergency-gender">
+                        <option value="">Select</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="emergency-contact">Contact</label>
+                      <input type="tel" id="emergency-contact" placeholder="Emergency contact">
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="complaint">Chief Complaint</label>
+                    <textarea id="complaint" rows="3" placeholder="Describe the emergency..."></textarea>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="severity">Severity Level</label>
+                    <div class="severity-options">
+                      <label class="severity-option">
+                        <input type="radio" name="severity" value="low"> Low
+                        <span class="severity-badge low">Low</span>
+                      </label>
+                      <label class="severity-option">
+                        <input type="radio" name="severity" value="medium"> Medium
+                        <span class="severity-badge medium">Medium</span>
+                      </label>
+                      <label class="severity-option">
+                        <input type="radio" name="severity" value="critical"> Critical
+                        <span class="severity-badge critical">Critical</span>
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary">Register & Triage</button>
+                </form>
+              </div>
+              
+              <div class="emergency-queue">
+                <h3>Emergency Queue</h3>
+                <div class="queue-item critical">
+                  <div class="queue-number">#E001</div>
+                  <div class="patient-info">
+                    <div class="patient-name">Unknown</div>
+                    <div class="complaint">Severe chest pain</div>
+                  </div>
+                  <div class="queue-status">
+                    <span class="severity-badge critical">Critical</span>
+                  </div>
+                  <div class="queue-actions">
+                    <button class="btn btn-danger">Attending</button>
+                  </div>
+                </div>
+                <div class="queue-item medium">
+                  <div class="queue-number">#E002</div>
+                  <div class="patient-info">
+                    <div class="patient-name">Priya Sharma</div>
+                    <div class="complaint">Fever and vomiting</div>
+                  </div>
+                  <div class="queue-status">
+                    <span class="severity-badge medium">Medium</span>
+                  </div>
+                  <div class="queue-actions">
+                    <button class="btn btn-warning">Attending</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lab Orders Page -->
+          <div id="lab-orders" class="page">
+            <div class="page-header">
+              <h1>Lab & Radiology Orders Dashboard</h1>
+              <p>Manage lab tests and radiology orders</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="lab-controls">
+                <h3>Lab Orders</h3>
+                <div class="tab-filters">
+                  <button class="tab-btn active" data-tab="pending">Pending</button>
+                  <button class="tab-btn" data-tab="in-progress">In Progress</button>
+                  <button class="tab-btn" data-tab="completed">Completed</button>
+                </div>
+              </div>
+              
+              <div class="table-section">
+                <div class="table-container">
+                  <table id="lab-orders-table">
+                    <thead>
+                      <tr>
+                        <th>Order ID</th>
+                        <th>Patient</th>
+                        <th>Test Type</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="lab-orders-body">
+                      <tr>
+                        <td>LAB001</td>
+                        <td>Rajesh Kumar</td>
+                        <td>Blood Test</td>
+                        <td>2024-01-20</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td>
+                          <button class="btn btn-secondary">Start</button>
+                          <button class="btn btn-warning">Cancel</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>LAB002</td>
+                        <td>Priya Sharma</td>
+                        <td>X-Ray</td>
+                        <td>2024-01-20</td>
+                        <td><span class="status-badge status-active">In Progress</span></td>
+                        <td>
+                          <button class="btn btn-secondary">Update</button>
+                          <button class="btn btn-success">Complete</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lab Reports Page -->
+          <div id="lab-reports" class="page">
+            <div class="page-header">
+              <h1>Report Upload & View</h1>
+              <p>Upload and view lab and radiology reports</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="upload-section">
+                <h3>Upload Report</h3>
+                <form id="report-upload-form">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="report-patient">Patient</label>
+                      <select id="report-patient" required>
+                        <option value="">Select Patient</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="report-type">Report Type</label>
+                      <select id="report-type" required>
+                        <option value="">Select Type</option>
+                        <option value="blood-test">Blood Test</option>
+                        <option value="x-ray">X-Ray</option>
+                        <option value="mri">MRI</option>
+                        <option value="ecg">ECG</option>
+                        <option value="urine-test">Urine Test</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="report-file">Upload File</label>
+                    <input type="file" id="report-file" accept=".pdf,.jpg,.jpeg,.png">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="report-notes">Notes</label>
+                    <textarea id="report-notes" rows="3" placeholder="Any additional notes..."></textarea>
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary">Upload Report</button>
+                </form>
+              </div>
+              
+              <div class="reports-list">
+                <h3>Recent Reports</h3>
+                <div class="report-item">
+                  <div class="report-info">
+                    <div class="report-title">Blood Test Report</div>
+                    <div class="report-patient">Rajesh Kumar (PAT001)</div>
+                    <div class="report-date">2024-01-19</div>
+                  </div>
+                  <div class="report-actions">
+                    <button class="btn btn-secondary">View</button>
+                    <button class="btn btn-warning">Download</button>
+                  </div>
+                </div>
+                <div class="report-item">
+                  <div class="report-info">
+                    <div class="report-title">X-Ray Report</div>
+                    <div class="report-patient">Priya Sharma (PAT002)</div>
+                    <div class="report-date">2024-01-18</div>
+                  </div>
+                  <div class="report-actions">
+                    <button class="btn btn-secondary">View</button>
+                    <button class="btn btn-warning">Download</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pharmacy Page -->
+          <div id="pharmacy" class="page">
+            <div class="page-header">
+              <h1>Pharmacy & Prescription Fulfillment</h1>
+              <p>Manage prescriptions and dispense medicines</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="prescription-list">
+                <h3>Prescriptions to Fulfill</h3>
+                <div class="prescription-item">
+                  <div class="prescription-info">
+                    <div class="patient-name">Rajesh Kumar (PAT001)</div>
+                    <div class="prescribed-medicines">
+                      <p><strong>Dr. John Smith</strong> prescribed:</p>
+                      <ul>
+                        <li>Amlodipine 5mg - 10 tablets</li>
+                        <li>Metformin 500mg - 15 tablets</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="prescription-actions">
+                    <button class="btn btn-success">Dispense</button>
+                    <button class="btn btn-secondary">View Details</button>
+                  </div>
+                </div>
+                <div class="prescription-item">
+                  <div class="prescription-info">
+                    <div class="patient-name">Priya Sharma (PAT002)</div>
+                    <div class="prescribed-medicines">
+                      <p><strong>Dr. Sarah Johnson</strong> prescribed:</p>
+                      <ul>
+                        <li>Paracetamol 650mg - 6 tablets</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="prescription-actions">
+                    <button class="btn btn-success">Dispense</button>
+                    <button class="btn btn-secondary">View Details</button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="inventory-check">
+                <h3>Inventory Check</h3>
+                <div class="inventory-item">
+                  <div class="medicine-name">Amlodipine 5mg</div>
+                  <div class="stock-info">
+                    <span class="stock-count">Available: 150 tablets</span>
+                    <span class="status-badge status-active">In Stock</span>
+                  </div>
+                </div>
+                <div class="inventory-item">
+                  <div class="medicine-name">Metformin 500mg</div>
+                  <div class="stock-info">
+                    <span class="stock-count">Available: 80 tablets</span>
+                    <span class="status-badge status-active">In Stock</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Billing Page -->
+          <div id="billing" class="page">
+            <div class="page-header">
+              <h1>Billing</h1>
+              <p>Generate and manage patient bills</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="billing-form">
+                <h3>New Bill</h3>
+                <form id="billing-form">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="billing-patient">Patient</label>
+                      <select id="billing-patient" required>
+                        <option value="">Select Patient</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="billing-type">Bill Type</label>
+                      <select id="billing-type" required>
+                        <option value="opd">OPD Consultation</option>
+                        <option value="ipd">IPD Charges</option>
+                        <option value="lab">Lab Tests</option>
+                        <option value="pharmacy">Pharmacy</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label>Bill Items</label>
+                    <div class="bill-items">
+                      <div class="bill-item">
+                        <input type="text" placeholder="Item description" class="bill-item-desc">
+                        <input type="number" placeholder="Quantity" class="bill-item-qty">
+                        <input type="number" placeholder="Rate" class="bill-item-rate">
+                        <input type="number" placeholder="Amount" class="bill-item-amount" readonly>
+                        <button type="button" class="btn btn-danger remove-item">X</button>
+                      </div>
+                    </div>
+                    <button type="button" class="btn btn-secondary add-item">Add Item</button>
+                  </div>
+                  
+                  <div class="bill-summary">
+                    <div class="summary-row">
+                      <span>Subtotal:</span>
+                      <span id="subtotal">₹0.00</span>
+                    </div>
+                    <div class="summary-row">
+                      <span>Tax (5%):</span>
+                      <span id="tax">₹0.00</span>
+                    </div>
+                    <div class="summary-row total">
+                      <span>Total:</span>
+                      <span id="total">₹0.00</span>
+                    </div>
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary">Generate Bill</button>
+                </form>
+              </div>
+              
+              <div class="recent-bills">
+                <h3>Recent Bills</h3>
+                <div class="bill-item">
+                  <div class="bill-info">
+                    <div class="bill-id">BILL001</div>
+                    <div class="patient-name">Rajesh Kumar (PAT001)</div>
+                    <div class="bill-date">2024-01-20</div>
+                  </div>
+                  <div class="bill-amount">₹1,250.00</div>
+                  <div class="bill-actions">
+                    <button class="btn btn-secondary">View</button>
+                    <button class="btn btn-warning">Print</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Insurance Page -->
+          <div id="insurance" class="page">
+            <div class="page-header">
+              <h1>Insurance & Payment Status</h1>
+              <p>Manage insurance claims and payment status</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="insurance-form">
+                <h3>Insurance Details</h3>
+                <form id="insurance-form">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="insurance-patient">Patient</label>
+                      <select id="insurance-patient" required>
+                        <option value="">Select Patient</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="insurance-provider">Insurance Provider</label>
+                      <select id="insurance-provider" required>
+                        <option value="">Select Provider</option>
+                        <option value="max">Max Bupa</option>
+                        <option value="apollo">Apollo Munich</option>
+                        <option value="hdfc">HDFC ERGO</option>
+                        <option value="icici">ICICI Lombard</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="policy-number">Policy Number</label>
+                      <input type="text" id="policy-number" placeholder="Enter policy number">
+                    </div>
+                    <div class="form-group">
+                      <label for="claim-amount">Claim Amount</label>
+                      <input type="number" id="claim-amount" placeholder="Enter amount">
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="claim-status">Claim Status</label>
+                    <select id="claim-status" required>
+                      <option value="submitted">Submitted</option>
+                      <option value="approved">Approved</option>
+                      <option value="rejected">Rejected</option>
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="claim-notes">Notes</label>
+                    <textarea id="claim-notes" rows="3" placeholder="Any additional notes..."></textarea>
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary">Update Claim</button>
+                </form>
+              </div>
+              
+              <div class="claims-list">
+                <h3>Recent Claims</h3>
+                <div class="claim-item">
+                  <div class="claim-info">
+                    <div class="patient-name">Rajesh Kumar (PAT001)</div>
+                    <div class="provider">Max Bupa</div>
+                    <div class="claim-date">2024-01-19</div>
+                  </div>
+                  <div class="claim-amount">₹15,000.00</div>
+                  <div class="claim-status">
+                    <span class="status-badge status-active">Approved</span>
+                  </div>
+                  <div class="claim-actions">
+                    <button class="btn btn-secondary">View</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inventory Page -->
+          <div id="inventory" class="page">
+            <div class="page-header">
+              <h1>Inventory Management</h1>
+              <p>Manage medicines and consumables inventory</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="inventory-form">
+                <h3>Add/Update Inventory</h3>
+                <form id="inventory-form">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="item-name">Item Name</label>
+                      <input type="text" id="item-name" placeholder="Enter item name" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="item-category">Category</label>
+                      <select id="item-category" required>
+                        <option value="">Select Category</option>
+                        <option value="medicine">Medicine</option>
+                        <option value="consumable">Consumable</option>
+                        <option value="equipment">Equipment</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="item-quantity">Quantity</label>
+                      <input type="number" id="item-quantity" placeholder="Enter quantity" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="item-unit">Unit</label>
+                      <input type="text" id="item-unit" placeholder="e.g., tablets, pieces" required>
+                    </div>
+                  </div>
+                  
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="item-min-stock">Min Stock Level</label>
+                      <input type="number" id="item-min-stock" placeholder="Minimum stock level" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="item-price">Price per Unit (₹)</label>
+                      <input type="number" id="item-price" step="0.01" placeholder="Price" required>
+                    </div>
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary">Update Inventory</button>
+                </form>
+              </div>
+              
+              <div class="inventory-table">
+                <h3>Inventory List</h3>
+                <div class="table-controls">
+                  <input type="text" id="inventory-search" placeholder="Search items...">
+                  <select id="inventory-category-filter">
+                    <option value="">All Categories</option>
+                    <option value="medicine">Medicine</option>
+                    <option value="consumable">Consumable</option>
+                    <option value="equipment">Equipment</option>
+                  </select>
+                </div>
+                <div class="table-container">
+                  <table id="inventory-table">
+                    <thead>
+                      <tr>
+                        <th>Item ID</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>Min Stock</th>
+                        <th>Price (₹)</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="inventory-body">
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Staff Directory Page -->
+          <div id="staff-directory" class="page">
+            <div class="page-header">
+              <h1>Staff Directory & Roles</h1>
+              <p>Manage hospital staff and their roles</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="staff-filters">
+                <h3>Staff Directory</h3>
+                <div class="filter-controls">
+                  <input type="text" id="staff-search" placeholder="Search staff...">
+                  <select id="staff-department-filter">
+                    <option value="">All Departments</option>
+                    <option value="general">General Medicine</option>
+                    <option value="cardiology">Cardiology</option>
+                    <option value="emergency">Emergency</option>
+                    <option value="laboratory">Laboratory</option>
+                    <option value="pharmacy">Pharmacy</option>
+                  </select>
+                  <select id="staff-role-filter">
+                    <option value="">All Roles</option>
+                    <option value="doctor">Doctor</option>
+                    <option value="nurse">Nurse</option>
+                    <option value="lab">Lab Staff</option>
+                    <option value="pharmacy">Pharmacy Staff</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="staff-list">
+                <div class="staff-item">
+                  <div class="staff-info">
+                    <div class="staff-name">Dr. John Smith</div>
+                    <div class="staff-role">Cardiology Specialist</div>
+                    <div class="staff-department">Cardiology</div>
+                    <div class="staff-contact">9876543210</div>
+                  </div>
+                  <div class="staff-actions">
+                    <button class="btn btn-secondary">View Profile</button>
+                  </div>
+                </div>
+                <div class="staff-item">
+                  <div class="staff-info">
+                    <div class="staff-name">Nurse Sarah Johnson</div>
+                    <div class="staff-role">Critical Care Nurse</div>
+                    <div class="staff-department">Emergency</div>
+                    <div class="staff-contact">8765432109</div>
+                  </div>
+                  <div class="staff-actions">
+                    <button class="btn btn-secondary">View Profile</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Admin Dashboard Page -->
+          <div id="admin-dashboard" class="page">
+            <div class="page-header">
+              <h1>Hospital Admin Dashboard</h1>
+              <p>Comprehensive hospital operations overview</p>
+            </div>
+            
+            <div class="dashboard-kpis">
+              <div class="kpi-card">
+                <div class="kpi-icon">
+                  <i class="fas fa-user-injured"></i>
+                </div>
+                <div class="kpi-info">
+                  <h3 id="total-patients-admin">0</h3>
+                  <p>Total Patients</p>
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-icon">
+                  <i class="fas fa-procedures"></i>
+                </div>
+                <div class="kpi-info">
+                  <h3 id="bed-occupancy-admin">0%</h3>
+                  <p>Bed Occupancy</p>
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-icon">
+                  <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="kpi-info">
+                  <h3 id="revenue-admin">₹0</h3>
+                  <p>Today's Revenue</p>
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-icon">
+                  <i class="fas fa-user-md"></i>
+                </div>
+                <div class="kpi-info">
+                  <h3 id="staff-count">0</h3>
+                  <p>Total Staff</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="dashboard-charts">
+              <div class="chart-container">
+                <h3>Department-wise Patient Load</h3>
+                <canvas id="dept-load-chart"></canvas>
+              </div>
+              <div class="chart-container">
+                <h3>Revenue by Department</h3>
+                <canvas id="revenue-dept-chart"></canvas>
+              </div>
+            </div>
+            
+            <div class="quick-actions">
+              <h3>Quick Actions</h3>
+              <div class="action-buttons">
+                <button class="btn btn-primary">Generate Reports</button>
+                <button class="btn btn-secondary">View Analytics</button>
+                <button class="btn btn-warning">Manage Staff</button>
+                <button class="btn btn-success">Update Inventory</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Department Analytics Page -->
+          <div id="department-analytics" class="page">
+            <div class="page-header">
+              <h1>Department-Level Analytics</h1>
+              <p>Detailed analytics by department</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="analytics-filters">
+                <h3>Analytics Filters</h3>
+                <div class="filter-row">
+                  <div class="form-group">
+                    <label for="dept-filter">Department</label>
+                    <select id="dept-filter">
+                      <option value="all">All Departments</option>
+                      <option value="cardiology">Cardiology</option>
+                      <option value="emergency">Emergency</option>
+                      <option value="general">General Medicine</option>
+                      <option value="pediatrics">Pediatrics</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="date-range">Date Range</label>
+                    <input type="date" id="start-date">
+                    <input type="date" id="end-date">
+                  </div>
+                  <button class="btn btn-primary" id="apply-filters">Apply</button>
+                </div>
+              </div>
+              
+              <div class="analytics-metrics">
+                <div class="metric-card">
+                  <h4>OPD Load</h4>
+                  <p class="metric-value">125</p>
+                  <p class="metric-desc">Patients this period</p>
+                </div>
+                <div class="metric-card">
+                  <h4>Lab Turnaround</h4>
+                  <p class="metric-value">4.2 hrs</p>
+                  <p class="metric-desc">Average completion time</p>
+                </div>
+                <div class="metric-card">
+                  <h4>Pharmacy Usage</h4>
+                  <p class="metric-value">85%</p>
+                  <p class="metric-desc">Medicines dispensed</p>
+                </div>
+              </div>
+              
+              <div class="analytics-charts">
+                <div class="chart-container">
+                  <h3>OPD Visits Trend</h3>
+                  <canvas id="opd-trend-chart"></canvas>
+                </div>
+                <div class="chart-container">
+                  <h3>Lab Test Volume</h3>
+                  <canvas id="lab-volume-chart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Clinical Risk Alert Dashboard -->
+          <div id="ai-alerts" class="page">
+            <div class="page-header">
+              <h1>AI Clinical Risk Alert Dashboard</h1>
+              <p>High-risk patients and AI-driven alerts</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="risk-alerts">
+                <h3>High-Risk Patients</h3>
+                <div class="alert-item">
+                  <div class="alert-info">
+                    <div class="patient-name">Rajesh Kumar (PAT001)</div>
+                    <div class="risk-score">
+                      <span class="risk-badge risk-high">High Risk</span>
+                      <span class="score-value">85%</span>
+                    </div>
+                  </div>
+                  <div class="alert-details">
+                    <p><strong>Reason:</strong> Elevated vital signs, medication non-compliance</p>
+                    <p><strong>AI Reasoning:</strong> Pattern analysis shows 3 missed appointments in last 2 weeks with elevated BP readings</p>
+                  </div>
+                  <div class="alert-actions">
+                    <button class="btn btn-danger">Alert Doctor</button>
+                    <button class="btn btn-secondary">View Details</button>
+                  </div>
+                </div>
+                <div class="alert-item">
+                  <div class="alert-info">
+                    <div class="patient-name">Priya Sharma (PAT002)</div>
+                    <div class="risk-score">
+                      <span class="risk-badge risk-medium">Medium Risk</span>
+                      <span class="score-value">65%</span>
+                    </div>
+                  </div>
+                  <div class="alert-details">
+                    <p><strong>Reason:</strong> Irregular follow-up visits</p>
+                    <p><strong>AI Reasoning:</strong> Patient has missed 2 scheduled appointments in last month</p>
+                  </div>
+                  <div class="alert-actions">
+                    <button class="btn btn-warning">Monitor</button>
+                    <button class="btn btn-secondary">View Details</button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="ai-insights">
+                <h3>AI Insights</h3>
+                <div class="insight-item">
+                  <h4>Predictive Analysis</h4>
+                  <p>Based on historical data, 23% of patients with similar patterns require intervention within 30 days.</p>
+                </div>
+                <div class="insight-item">
+                  <h4>Recommendation</h4>
+                  <p>Proactive follow-up calls for high-risk patients can reduce readmission rates by up to 35%.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Revenue Leakage/Fraud Detection Page -->
+          <div id="fraud-detection" class="page">
+            <div class="page-header">
+              <h1>Revenue Leakage & Fraud Detection</h1>
+              <p>Identify potential billing fraud and revenue leakage</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="fraud-filters">
+                <h3>Fraud Detection Filters</h3>
+                <div class="filter-row">
+                  <div class="form-group">
+                    <label for="fraud-date-range">Date Range</label>
+                    <input type="date" id="fraud-start-date">
+                    <input type="date" id="fraud-end-date">
+                  </div>
+                  <div class="form-group">
+                    <label for="fraud-type">Anomaly Type</label>
+                    <select id="fraud-type">
+                      <option value="all">All Types</option>
+                      <option value="duplicate">Duplicate Billing</option>
+                      <option value="upcoding">Upcoding</option>
+                      <option value="missing">Missing Charges</option>
+                      <option value="unusual">Unusual Patterns</option>
+                    </select>
+                  </div>
+                  <button class="btn btn-primary" id="scan-fraud">Scan for Fraud</button>
+                </div>
+              </div>
+              
+              <div class="fraud-table">
+                <h3>Suspicious Entries</h3>
+                <div class="table-container">
+                  <table id="fraud-table">
+                    <thead>
+                      <tr>
+                        <th>Bill ID</th>
+                        <th>Patient</th>
+                        <th>Service</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Anomaly Type</th>
+                        <th>Confidence</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="fraud-body">
+                      <tr class="suspicious-row">
+                        <td>BILL005</td>
+                        <td>Rajesh Kumar</td>
+                        <td>Lab Test</td>
+                        <td>₹2,500</td>
+                        <td>2024-01-15</td>
+                        <td>Duplicate Billing</td>
+                        <td>95%</td>
+                        <td>
+                          <button class="btn btn-danger">Flag</button>
+                          <button class="btn btn-secondary">Review</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+              <div class="fraud-summary">
+                <h3>Fraud Detection Summary</h3>
+                <div class="summary-metrics">
+                  <div class="metric-card">
+                    <h4>Suspicious Bills</h4>
+                    <p class="metric-value">5</p>
+                  </div>
+                  <div class="metric-card">
+                    <h4>Potential Loss</h4>
+                    <p class="metric-value">₹12,500</p>
+                  </div>
+                  <div class="metric-card">
+                    <h4>Detection Rate</h4>
+                    <p class="metric-value">87%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Smart Bed & Resource Optimization Page -->
+          <div id="bed-optimization" class="page">
+            <div class="page-header">
+              <h1>Smart Bed & Resource Optimization</h1>
+              <p>Optimize bed utilization and resource allocation</p>
+            </div>
+            
+            <div class="content-section">
+              <div class="optimization-controls">
+                <h3>Bed Utilization Dashboard</h3>
+                <div class="control-filters">
+                  <div class="form-group">
+                    <label for="ward-filter">Ward</label>
+                    <select id="ward-filter">
+                      <option value="all">All Wards</option>
+                      <option value="general">General Ward</option>
+                      <option value="icu">ICU</option>
+                      <option value="ccu">CCU</option>
+                      <option value="pediatric">Pediatric</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="time-perspective">Time Perspective</label>
+                    <select id="time-perspective">
+                      <option value="current">Current Status</option>
+                      <option value="24h">Next 24 Hours</option>
+                      <option value="7d">Next 7 Days</option>
+                      <option value="30d">Next 30 Days</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="bed-heatmap">
+                <h3>Bed Utilization Heatmap</h3>
+                <div class="ward-layout">
+                  <div class="ward-section">
+                    <h4>General Ward</h4>
+                    <div class="bed-grid">
+                      <div class="bed-unit available" title="G001 - Available">G001</div>
+                      <div class="bed-unit occupied" title="G002 - Occupied (Discharge: Tomorrow)">G002</div>
+                      <div class="bed-unit occupied" title="G003 - Occupied (Discharge: In 2 days)">G003</div>
+                      <div class="bed-unit available" title="G004 - Available">G004</div>
+                      <div class="bed-unit reserved" title="G005 - Reserved (Admission: Today)">G005</div>
+                    </div>
+                  </div>
+                  <div class="ward-section">
+                    <h4>ICU</h4>
+                    <div class="bed-grid">
+                      <div class="bed-unit occupied" title="ICU001 - Occupied (Critical)">ICU001</div>
+                      <div class="bed-unit occupied" title="ICU002 - Occupied (Critical)">ICU002</div>
+                      <div class="bed-unit available" title="ICU003 - Available">ICU003</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="optimization-insights">
+                <h3>Optimization Insights</h3>
+                <div class="insight-item">
+                  <h4>Predicted Discharges</h4>
+                  <p>5 patients expected to discharge in next 24 hours (83% accuracy)</p>
+                </div>
+                <div class="insight-item">
+                  <h4>Resource Allocation</h4>
+                  <p>Recommend moving 2 patients from ICU to general ward based on condition stability</p>
+                </div>
+                <div class="insight-item">
+                  <h4>Efficiency Score</h4>
+                  <p>Current bed utilization: 78% (Target: 85%)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
